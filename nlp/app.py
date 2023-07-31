@@ -4,6 +4,13 @@ from fastapi.templating import Jinja2Templates
 
 import matplotlib.pyplot as plt
 
+import os, sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+from db_session import SessionLocal
+from model import NlpLog
+
+
 from modules.KoBERT_module import load_nlp_model, emotion_predict
 
 app = FastAPI()
@@ -28,8 +35,15 @@ def ep2(request: Request):
 async def get_emotion(request: Request):
     form_data = await request.form()
     sentence = form_data['sentence']
-    print(sentence)
     result = emotion_predict(model, sentence)
+    
+    with SessionLocal() as db:
+        log = NlpLog()
+        log.id = 1
+        log.sentence = sentence
+        log.user_id = 1
+        db.add(log)
+        db.commit()
     
     ratio, labels = [], []
     for i in result:

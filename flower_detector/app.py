@@ -12,5 +12,4 @@ async def flower_detec(image : UploadFile = File(...)):
     
     img_size = len(await image.read())
     
-    
     return {'img_size' : img_size }
