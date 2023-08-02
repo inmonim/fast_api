@@ -8,6 +8,7 @@ class User(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
+    password = Column(String)
     
 class NlpLog(Base):
     __tablename__ = 'nlp_log'
