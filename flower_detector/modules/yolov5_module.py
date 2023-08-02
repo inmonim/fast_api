@@ -7,6 +7,4 @@ img = Image.open('../test_img/rose.jpg')
 
 result = model(img)
 
-
-
 print(result.xywh)
