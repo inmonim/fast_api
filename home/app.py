@@ -39,7 +39,7 @@ app = FastAPI()
 
 @app.get('/')
 def homepage():
-    return {'hello' : 'world'}
+    return {'hello' : 'Home'}
 
 @app.get('/{user_id}')
 def get_user_id(user_id):

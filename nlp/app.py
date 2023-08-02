@@ -15,6 +15,10 @@ from modules.KoBERT_module import load_nlp_model, emotion_predict
 
 app = FastAPI()
 
+
+if not os.path.isdir('plt_tmp'):
+    os.mkdir('plt_tmp')
+
 app.mount("/plt_img", StaticFiles(directory="./plt_tmp"), name='plt_img')
 
 templates = Jinja2Templates(directory='./templates')
@@ -24,7 +28,7 @@ model = load_nlp_model()
 
 @app.get('/')
 def home():
-    return {'Hello': 'World'}
+    return {'Hello': 'NLP'}
 
 @app.get('/get_emotion')
 def ep2(request: Request):
@@ -39,7 +43,6 @@ async def get_emotion(request: Request):
     
     with SessionLocal() as db:
         log = NlpLog()
-        log.id = 1
         log.sentence = sentence
         log.user_id = 1
         db.add(log)
@@ -54,7 +57,7 @@ async def get_emotion(request: Request):
     plt.pie(ratio, labels=labels, autopct='%.1f%%')
     image_path = f'./plt_tmp/{sentence}.png'
     plt.savefig(image_path)
-    image_path = f'http://127.0.0.1:8000/plt_img/{sentence}.png'
+    image_path = f'http://t0922.p.ssafy.io:8000/plt_img/{sentence}.png'
     plt.close()
     
     return templates.TemplateResponse('nlp.html', {'request': request, 'result': result, 'image_path':image_path})
