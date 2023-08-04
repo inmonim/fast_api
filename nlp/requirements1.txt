@@ -1,0 +1,1 @@
+kobert @ git+https://git@github.com/SKTBrain/KoBERT.git@47a69af87928fc24e20f571fe10c3cc9dd9af9a3
