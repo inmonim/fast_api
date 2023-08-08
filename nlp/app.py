@@ -57,7 +57,7 @@ async def get_emotion(request: Request):
     plt.pie(ratio, labels=labels, autopct='%.1f%%')
     image_path = f'./plt_tmp/{sentence}.png'
     plt.savefig(image_path)
-    image_path = f'http://t0922.p.ssafy.io:8000/plt_img/{sentence}.png'
+    image_path = f'http://t0922.p.ssafy.io:8001/plt_img/{sentence}.png'
     plt.close()
     
     return templates.TemplateResponse('nlp.html', {'request': request, 'result': result, 'image_path':image_path})

@@ -18,13 +18,12 @@ engine = create_engine(DB_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
-# def test_connect():
+def test_connect():
     
-#     from model import User
+    from model import User
     
-#     with SessionLocal() as db:
-#         test_user = db.query(User).filter(User.id == 1).first()
-        
-#     print(test_user.name)
+    with SessionLocal() as db:
+        test_user = db.query(User).filter(User.id == 1).first()
+    print(test_user.name)
 
-# test_connect()
+test_connect()
